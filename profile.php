@@ -57,3 +57,10 @@ if (isset($_SESSION["username"])) {
         </div>
     </div>
 </div>
+
+<?php
+$numberOfRowsReturned = $conn->querySingle("SELECT count(*) FROM messaging WHERE recipient='$userId'")
+if ($numberOfRowsReturned > 0) {
+    $messages = $conn->query("SELECT count(*) FROM messaging WHERE recipient='$userId' )
+}
+?>

@@ -32,6 +32,9 @@ createTable($createProductsTableQuery, "Products");
 $createOrderDetailsTableQuery = file_get_contents("sql/create-orderDetails.sql");
 createTable($createOrderDetailsTableQuery, "Order Details");
 
+$query = file_get_contents("sql/create-messaging.sql");
+createTable($query, "Messaging");
+
 /* commented out tables that are not needed yet
 //creates messages table
 $createMessagingTableQuery = file_get_contents("sql/create-messaging.sql");

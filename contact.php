@@ -1,27 +1,30 @@
-<?php
-//includes the mav bar
-include "template.php"; ?>
-<!--title-->
-<title>Contact Us</title>
+<?php include "template.php";
+/**
+ * Contact Us Page.
+ * Collects the users email address and message.
+ * Stores the details in the messaging table for the administrator to read.
+ *
+ * "Defines" the conn variable, removing the undefined variable errors.
+ * @var SQLite3 $conn
+ */
+?>
+    <title>Contact Us</title>
 
-<!--heading-->
-<h1 style='margin-left: 10px' class='text-primary'>Contact Us</h1>
-
-<div class="container-fluid">
-    <h1 class="text-primary">Please Send us a Message</h1>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="mb-3">
-            <label for="contactEmail" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="contactEmail" name="contactEmail"
-                   placeholder="name@example.com">
-        </div>
-        <div class="mb-3">
-            <label for="contactMessage" class="form-label">Message</label>
-            <textarea class="form-control" id="contactMessage" name="contactMessage" rows="3"></textarea>
-        </div>
-        <button type="submit" name="formSubmit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+    <div class="container-fluid">
+        <h1 class="text-primary">Please Send us a Message</h1>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="mb-3">
+                <label for="contactEmail" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="contactEmail" name="contactEmail"
+                       placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="contactMessage" class="form-label">Message</label>
+                <textarea class="form-control" id="contactMessage" name="contactMessage" rows="3"></textarea>
+            </div>
+            <button type="submit" name="formSubmit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 
 <?php
 if (isset($_POST['formSubmit'])) {
@@ -46,7 +49,6 @@ if (isset($_POST['formSubmit'])) {
         date_default_timezone_set('Australia/Sydney');
         $submittedDateTime = date("Y-m-d h:i:sa");
 
-        $conn =;
         $sqlStmt = $conn->prepare("INSERT INTO messaging (sender, recipient, message, dateSubmitted) VALUES (:sender, :recipient, :message, :dateSubmitted)");
         $sqlStmt->bindValue(":sender", $userEmail);
         $sqlStmt->bindValue(":recipient", 1);
@@ -57,4 +59,3 @@ if (isset($_POST['formSubmit'])) {
     }
 }
 ?>
-<!--nothing here yet-->

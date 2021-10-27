@@ -1,5 +1,7 @@
 <?php
 //includes the Navbar
+
+ob_start();
 include "template.php"; ?>
 <!--title-->
 <title>User Registration</title>
@@ -136,6 +138,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
+ob_end_flush();
 ?>
 </body>
 </html>
