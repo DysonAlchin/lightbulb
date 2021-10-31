@@ -59,8 +59,32 @@ if (isset($_SESSION["username"])) {
 </div>
 
 <?php
-$numberOfRowsReturned = $conn->querySingle("SELECT count(*) FROM messaging WHERE recipient='$userId'")
+$numberOfRowsReturned = $conn->querySingle("SELECT count(*) FROM messaging WHERE recipient='$userId'");
 if ($numberOfRowsReturned > 0) {
-    $messages = $conn->query("SELECT count(*) FROM messaging WHERE recipient='$userId' )
+    $messages = $conn->query("SELECT count(*) FROM messaging WHERE recipient='$userId'" );
+
+?>
+   <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 text-success"><h2>From</h2></div>
+        <div class="col-md-4 text-success"><h2>Message</h2></div>
+        <div class="col-md-4 text-success"><h2>Date Sent</h2></div>
+    </div>
+
+    <?php
+    while($individual_message = $messages->fetchArray()) {
+        $sender = $individual_message[1];
+        $message = $individual_message[3];
+        $dateSubmitted = $individual_message[4];
+        ?>
+        <divclass="row">
+        <divclass="col-md-4"><?php echo$sender;?></div>
+        <divclass="col-md-4"><?php echo$message;?></div>
+        <divclass="col-md-4"><?php echo$dateSubmitted;?></div>
+        </div>
+
+        <?php
+    }
+
 }
 ?>
